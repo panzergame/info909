@@ -2,9 +2,7 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches: [ division ]
 
 jobs:
 
@@ -36,18 +34,4 @@ jobs:
       name: Testing App
       working-directory: app
       run: npm test
-    - 
-      name: Build the Docker image
-      run: docker build app --file app/Dockerfile --tag info909:latest
-    -
-      name: Push to GitHub Packages
-      uses: mr-smithers-excellent/docker-build-push@v5
-      with:
-        image: info909/app
-        tags: latest
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-        registry: docker.pkg.github.com
-        directory: app
-        dockerfile: app/Dockerfile
 
